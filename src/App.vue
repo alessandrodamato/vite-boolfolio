@@ -2,15 +2,18 @@
   import axios from 'axios';
   import { store } from './data/store';
   import ProjectCard from './components/ProjectCard.vue';
+  import Paginator from './components/Paginator.vue';
   export default {
     
     components:{
-      ProjectCard
+      ProjectCard,
+      Paginator
     },
 
     data(){
       return{
-        projects: []
+        projects: [],
+        links: []
       }
     },
 
@@ -19,7 +22,7 @@
         axios.get(store.apiUrl)
              .then(res => {
                this.projects = res.data.data;
-               console.log(this.projects);
+               this.links = res.data.links;
              })
              .catch(err => {
               console.log(err.message);
@@ -46,6 +49,10 @@
       :project="project"
     />
 
+  </div>
+
+  <div class="container">
+    <Paginator :links="links" @changePage="getApi"/>
   </div>
 
 </template>
