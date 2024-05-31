@@ -1,11 +1,15 @@
 <script>
   import axios from 'axios';
   import { store } from './data/store';
-  import ProjectCard from './components/ProjectCard.vue';
-  import Paginator from './components/Paginator.vue';
+  import Header from './components/Header.vue';
+  import Footer from './components/Footer.vue';
+  import ProjectCard from './components/partials/ProjectCard.vue';
+  import Paginator from './components/partials/Paginator.vue';
   export default {
     
     components:{
+      Header,
+      Footer,
       ProjectCard,
       Paginator
     },
@@ -41,6 +45,8 @@
 
 <template>
 
+  <Header/>
+
   <div class="container projects-container">
 
     <ProjectCard
@@ -54,6 +60,8 @@
   <div class="container">
     <Paginator :links="links" @changePage="getApi"/>
   </div>
+
+  <Footer/>
 
 </template>
 
