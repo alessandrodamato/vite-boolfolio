@@ -1,29 +1,23 @@
-# vite-boolfolio
+# Vite Boolfolio
 
-This template should help get you started developing with Vue 3 in Vite.
+Milestone 1  
+nome repo 1: laravel-api  
+Aggiungiamo al nostro progetto Laravel una nuovo Api/ProjectController. Questo controller risponderà a delle richieste via API e si occuperà di restituire la lista dei progetti presenti nel database in formato json.
 
-## Recommended IDE Setup
+Milestone 2  
+Testiamo la chiamata API tramite Thuder Client e assicuriamoci di ricevere i dati correttamente.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Milestone 3  
+nome repo 2: vite-boolfolio  
+Iniziamo ad occuparci della parte front-office della nostra applicazione: creiamo un nuovo progetto Vue 3  e installiamo axios.  
+Colleghiamo questo progetto ad una repo separata.
 
-## Customize configuration
+Milestone 4  
+Nel componente principale della nostra Vue App facciamo una chiamata API all’endpoint costruito nel progetto Laravel (milestone 1) e recuperiamo tutti i progetti dal nostro back-end.  
+Stampiamo in console i risultati e verifichiamo di ricevere i dati correttamente.  
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Milestone 5  
+Creiamo un nuovo componente ProjectCard, che corrisponde ad una card per visualizzare un progetto.   Utilizziamo questo componente per visualizzare tutti i progetti ricevuti tramite API.  
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Bonus:  
+Gestire la paginazione dei risultati
