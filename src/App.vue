@@ -20,7 +20,8 @@
       return{
         projects: [],
         links: [],
-        isLoading: true
+        isLoading: true,
+        isError: false
       }
     },
 
@@ -34,6 +35,7 @@
              })
              .catch(err => {
               this.isLoading = false;
+              this.isError = true;
               console.log(err.message);
              })
       }
@@ -52,7 +54,7 @@
 
   <Header/>
 
-  <div v-if="!isLoading" class="container projects-container">
+  <div v-if="!isLoading && !isError" class="container projects-container">
 
     <ProjectCard
       v-for="project in projects"
@@ -62,11 +64,11 @@
 
   </div>
 
-  <div v-if="!isLoading" class="container">
+  <div v-if="!isLoading && !isError" class="container">
     <Paginator :links="links" @changePage="getApi"/>
   </div>
 
-  <Loader v-if="isLoading"/>
+  <Loader v-if="isLoading || isError"/>
 
   <Footer/>
 
