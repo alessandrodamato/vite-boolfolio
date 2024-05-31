@@ -36,9 +36,9 @@
     margin: 0 30px 30px;
     padding: 50px;
     border-radius: 20px;
-    border: 1px dashed black;
     text-align: center;
-    background-color: white;
+    border: 1px solid black;
+    background: linear-gradient(to top right, green, greenyellow);
     ul{
       list-style: none;
       li{
