@@ -18,7 +18,7 @@
       getApi(){
         axios.get(store.apiUrl)
              .then(res => {
-               this.projects = res.data;
+               this.projects = res.data.data;
                console.log(this.projects);
              })
              .catch(err => {

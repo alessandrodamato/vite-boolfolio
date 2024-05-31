@@ -15,6 +15,13 @@
       <li><h2>{{ project.id }} - {{ project.name }}</h2></li>
       <li><h4>Creatore: {{ project.creator }}</h4></li>
       <li><h4>Obiettivo: {{ project.objective }}</h4></li>
+      <li v-if="project.type">
+        <h5>Tipo: {{ project.type.name }}</h5>
+      </li>
+      <li v-if="project.technologies.length > 0">
+        <h5>Tecnologie: </h5>
+        <span class="technology" v-for="technology in project.technologies" :key="technology.id">{{ technology.name }}</span>
+      </li>
       <li><p>{{ project.description }}</p></li>
     </ul>
   </div>
@@ -36,6 +43,15 @@
       list-style: none;
       li{
         margin: 10px 0;
+        .technology{
+          font-size: .9rem;
+          &::after{
+          content: ', ';
+          }
+          &:last-child::after{
+            content: '';
+          }
+        } 
       }
     }
   }
