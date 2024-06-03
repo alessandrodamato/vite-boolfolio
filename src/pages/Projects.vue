@@ -101,7 +101,7 @@
     .tt{
       width: calc(50% - 60px);
       margin: 0 30px 30px;
-      padding: 50px;
+      padding: 30px;
       border-radius: 20px;
       text-align: center;
       border: 1px solid black;
@@ -110,6 +110,7 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+        margin-top: 10px;
         .badge{
           min-width: 80px;
           height: 40px;
