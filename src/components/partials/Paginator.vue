@@ -23,8 +23,8 @@
         <button
           @click="$emit('changePage', link.url)"
           v-html="link.label"
-          :class="{'active' : link.active, 'disabled' : link.url === null}"
-          :disabled="link.url === null"
+          :class="{'active' : link.active, 'disabled' : !link.url}"
+          :disabled="!link.url"
         ></button>
       </li>
     </ul>
@@ -38,8 +38,9 @@
   .paginator{
     display: flex;
     justify-content: center;
+    width: 100%;
     height: 70px;
-    margin: 0 0 50px;
+    margin-top: 20px;
     ul{
       width: 600px;
       list-style: none;
