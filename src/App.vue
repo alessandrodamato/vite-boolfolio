@@ -27,6 +27,7 @@
 
     methods:{
       getApi(){
+        this.isLoading = true;
         axios.get(store.apiUrl)
              .then(res => {
                this.projects = res.data.data;
