@@ -20,7 +20,12 @@
   <div class="paginator">  
     <ul>
       <li v-for="(link, index) in links" :key="index">
-        <button @click="store.apiUrl = link.url; $emit('changePage')" v-html="link.label" :class="{'active' : link.active, 'disabled' : link.url === null}"></button>
+        <button
+          @click="store.apiUrl = link.url; $emit('changePage')"
+          v-html="link.label"
+          :class="{'active' : link.active, 'disabled' : link.url === null}"
+          :disabled="link.url === null"
+        ></button>
       </li>
     </ul>
   </div>
