@@ -1,8 +1,8 @@
 <script>
 
-  import axios from 'axios';
   import { store } from '../data/store';
-   import ProjectCard from '../components/partials/ProjectCard.vue';
+  import axios from 'axios';
+  import ProjectCard from '../components/partials/ProjectCard.vue';
   import Paginator from '../components/partials/Paginator.vue';
   import Loader from '../components/partials/Loader.vue';
 
@@ -15,20 +15,31 @@
     },
     data(){
       return{
+        types: [],
+        technologies: [],
         projects: [],
-        links: [],
+        projectsLinks: [],
         isLoading: true,
         isError: false
       }
     },
     methods:{
-      getApi(){
+      getApi(apiUrl, category = ''){
         this.isLoading = true;
-        axios.get(store.apiUrl)
+        axios.get(apiUrl + category)
              .then(res => {
-               this.projects = res.data.data;
-               this.links = res.data.links;
                this.isLoading = false;
+               switch(category) {
+                case 'types':
+                  this.types = res.data;
+                  break;
+                case 'technologies':
+                  this.technologies = res.data;
+                  break;
+                default:
+                this.projects = res.data.data;
+                this.projectsLinks = res.data.links;
+              }
              })
              .catch(err => {
               this.isLoading = false;
@@ -38,7 +49,7 @@
       }
     },
     mounted(){
-      this.getApi();
+      this.getApi(store.apiUrl, 'projects');
     }
   }
 </script>
@@ -59,11 +70,11 @@
     </div>
 
     <div v-if="!isLoading && !isError" class="container">
-    <Paginator :links="links" @changePage="getApi"/>
+    <Paginator :links="projectsLinks" @changePage="getApi"/>
     </div>
 
     <Loader v-if="isLoading || isError"/>
-    
+
   </div>
 </template>
 
