@@ -12,7 +12,7 @@
 <template>
   <div class="project-card">
     <ul>
-      <li><h2>{{ project.id }} - {{ project.name }}</h2></li>
+      <li><h2>{{ project.id }} - <router-link :to="{name: 'projectDetail', params: {slug: project.slug}}">{{ project.name }}</router-link></h2></li>
       <li><h4>Creatore: {{ project.creator }}</h4></li>
       <li><h4>Obiettivo: {{ project.objective }}</h4></li>
       <li v-if="project.type">
@@ -39,6 +39,13 @@
     text-align: center;
     border: 1px solid black;
     background: linear-gradient(to top right, green, greenyellow);
+    a{
+      text-decoration: none;
+      color: black;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
     ul{
       list-style: none;
       li{
