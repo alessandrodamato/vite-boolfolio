@@ -67,7 +67,7 @@
       <div class="tt">
         <h3>Elenco Tecnologie:</h3>
         <div class="tt-wrapper">
-          <div v-for="item in technologies" :key="`technology-${item.id}`" class="badge">{{ item.name }}</div>
+          <router-link :to="{name: 'technologyProjects', params: {slug: item.slug}}" v-for="item in technologies" :key="`technology-${item.id}`" class="badge">{{ item.name }}</router-link>
         </div>
       </div>
       <div class="tt">
@@ -119,6 +119,11 @@
           border: 1px solid black;
           border-radius: 10px;
           background: linear-gradient(to bottom left, gray, lightgray);
+          color: black;
+          text-decoration: none;
+          &:hover{
+            background: linear-gradient(to top right, gray, lightgray);
+          }
         }
       }
     }
