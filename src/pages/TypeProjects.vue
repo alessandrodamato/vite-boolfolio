@@ -7,7 +7,7 @@
   import Loader from '../components/partials/Loader.vue';
 
   export default {
-    name: 'technologyPosts',
+    name: 'typeProjects',
     components:{
       ProjectCard,
       Paginator,
@@ -24,9 +24,9 @@
       getApi(apiUrl, slug){
         this.isLoading = true;
         this.isError = false;
-        axios.get(apiUrl + 'tecnologie-progetti/' + slug)
+        axios.get(apiUrl + 'tipo-progetti/' + slug)
              .then(res => {
-                this.technology = res.data;
+                this.type = res.data;
                 this.isLoading = false;
              })
              .catch(err => {
@@ -48,9 +48,9 @@
   <div>
     
     <div v-if="!isLoading && !isError" class="container projects-container">
-      <h1>Filtro per: {{ technology.name }}</h1>
+      <h1>Filtro per: {{ type.name }}</h1>
       <ProjectCard
-        v-for="project in technology.projects"
+        v-for="project in type.projects"
         :key="project.id"
         :project="project"
       />

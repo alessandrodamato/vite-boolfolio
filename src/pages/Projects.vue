@@ -73,7 +73,7 @@
       <div class="tt">
         <h3>Elenco Tipi:</h3>
         <div class="tt-wrapper">
-          <div v-for="item in types" :key="`type-${item.id}`" class="badge">{{ item.name }}</div>
+          <router-link :to="{name: 'typeProjects', params: {slug: item.slug}}" v-for="item in types" :key="`type-${item.id}`" class="badge">{{ item.name }}</router-link>
         </div>
       </div>
       <ProjectCard
