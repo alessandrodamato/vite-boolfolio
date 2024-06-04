@@ -48,6 +48,7 @@
   <div>
     
     <div v-if="!isLoading && !isError" class="container projects-container">
+      <h1>Filtro per: {{ technology.name }}</h1>
       <ProjectCard
         v-for="project in technology.projects"
         :key="project.id"
@@ -69,6 +70,11 @@
     justify-content: center;
     flex-wrap: wrap;
     padding: 50px 0;
+    h1{
+      width: 100%;
+      margin-bottom: 30px;
+      text-align: center;
+    }
   }
 
 </style>

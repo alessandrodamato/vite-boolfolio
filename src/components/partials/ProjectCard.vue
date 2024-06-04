@@ -18,7 +18,7 @@
       <li v-if="project.type">
         <h5>Tipo: {{ project.type.name }}</h5>
       </li>
-      <li v-if="project.technologies.length > 0">
+      <li v-if="project.technologies?.length > 0">
         <h5>Tecnologie: </h5>
         <span class="technology" v-for="technology in project.technologies" :key="technology.id">{{ technology.name }}</span>
       </li>
