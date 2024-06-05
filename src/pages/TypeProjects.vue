@@ -28,6 +28,9 @@
              .then(res => {
                 this.type = res.data;
                 this.isLoading = false;
+                if(!this.type.id){
+                  this.$router.push('/error404');
+                }
              })
              .catch(err => {
                 this.isLoading = false;

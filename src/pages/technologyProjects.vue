@@ -28,6 +28,10 @@
              .then(res => {
                 this.technology = res.data;
                 this.isLoading = false;
+                console.log(this.technology);
+                if(!this.technology.id){
+                  this.$router.push('/error404');
+                }
              })
              .catch(err => {
                 this.isLoading = false;

@@ -16,11 +16,11 @@
       <li><h4>Creatore: {{ project.creator }}</h4></li>
       <li><h4>Obiettivo: {{ project.objective }}</h4></li>
       <li v-if="project.type">
-        <h5>Tipo: {{ project.type.name }}</h5>
+        <h5>Tipo: <router-link :to="{name: 'typeProjects', params: {slug: project.type.slug}}">{{ project.type.name }}</router-link></h5>
       </li>
       <li v-if="project.technologies?.length > 0">
         <h5>Tecnologie: </h5>
-        <span class="technology" v-for="technology in project.technologies" :key="technology.id">{{ technology.name }}</span>
+        <router-link :to="{name: 'technologyProjects', params: {slug: technology.slug}}" class="technology" v-for="technology in project.technologies" :key="technology.id">{{ technology.name }}</router-link>
       </li>
       <li><p>{{ project.description }}</p></li>
     </ul>

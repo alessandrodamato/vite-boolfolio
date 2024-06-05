@@ -19,6 +19,9 @@ import Loader from '../components/partials/Loader.vue';
              .then(res => {
               this.project = res.data.project;
               this.success = res.data.success;
+              if(!this.project){
+                this.$router.push('/error404');
+              }
              })
              .catch(err => {
                 console.log(err.message);
