@@ -1,18 +1,24 @@
 <script>
-  import {store} from '../data/store';
-  import axios from 'axios';
+import {store} from '../data/store';
+import axios from 'axios';
+import Loader from '../components/partials/Loader.vue';
   export default {
     name: 'ProjectDetail',
+    components:{
+      Loader
+    },
     data(){
       return{
-        project: {}
+        project: {},
+        success: false
       }
     },
     methods:{
       getApi(apiUrl, slug){
         axios.get(apiUrl + 'dettaglio-progetto/' + slug)
              .then(res => {
-              this.project = res.data;
+              this.project = res.data.project;
+              this.success = res.data.success;
              })
              .catch(err => {
                 console.log(err.message);
@@ -38,17 +44,20 @@
 
 
 <template>
-  <div class="main-wrapper container">
-    <h1>{{ project.name }} - {{ formattedDate }}</h1>
-    <img :src="project.image" :alt="project.image_original_name">
-    <h5 v-if="project.image_original_name !== '-'">{{ project.image_original_name }}</h5>
-    <h3>Creatore: {{ project.creator }}</h3>
-    <h3>Obiettivo: {{ project.objective }}</h3>
-    <h3 v-if="project.type">Tipo: {{ project.type?.name }}</h3>
-    <h3 v-if="project.technologies?.length > 0">Tecnologie:
-      <span v-for="(technology, index) in project.technologies" :key="`t-${technology.id}`">{{ technology.name }}<span v-if="index !== project.technologies.length - 1">, </span></span>
-    </h3>
-    <p>{{ project.description }}</p>
+  <div>
+    <div v-if="success" class="main-wrapper container">
+      <h1>{{ project.name }} - {{ formattedDate }}</h1>
+      <img :src="project.image" :alt="project.image_original_name">
+      <h5 v-if="project.image_original_name !== '-'">{{ project.image_original_name }}</h5>
+      <h3>Creatore: {{ project.creator }}</h3>
+      <h3>Obiettivo: {{ project.objective }}</h3>
+      <h3 v-if="project.type">Tipo: {{ project.type?.name }}</h3>
+      <h3 v-if="project.technologies?.length > 0">Tecnologie:
+        <span v-for="(technology, index) in project.technologies" :key="`t-${technology.id}`">{{ technology.name }}<span v-if="index !== project.technologies.length - 1">, </span></span>
+      </h3>
+      <p>{{ project.description }}</p>
+    </div>
+    <Loader v-else/>
   </div>
 </template>
 
