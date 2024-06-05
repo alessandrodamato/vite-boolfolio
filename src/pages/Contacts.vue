@@ -1,6 +1,41 @@
 <script>
+  import { store } from '../data/store';
+  import axios from 'axios';
+  import Loader from '../components/partials/Loader.vue';
   export default {
-    name: 'Contacts'
+    name: 'Contacts',
+    components:{
+      Loader
+    },
+    data(){
+      return{
+        formData:{
+          name: '',
+          surname: '',
+          email: '',
+          message: ''
+        },
+        errors: {},
+        sending: false,
+        sent: false
+      }
+    },
+    methods:{
+      submitForm(){
+        this.sending = true;
+        axios.post(store.apiUrl + 'send-email', this.formData)
+             .then(res => {
+              this.sending = false;
+              this.sent = res.data.success;
+              this.errors = res.data.errors;
+              console.log(res.data);
+             })
+             .catch(err => {
+              this.sending = false;
+              console.log(err.message);
+             })
+      }
+    }
   }
 </script>
 
@@ -8,17 +43,25 @@
 
 <template>
   <div class="main-wrapper container">
-    <form>
-      <div class="form-image"></div>
-      <div class="form-inputs">
-        <h2>Contattaci</h2>
-        <input type="text" placeholder="Nome">
-        <input type="text" placeholder="Cognome">
-        <input type="text" placeholder="Email">
-        <textarea rows="4" placeholder="Messaggio"></textarea>
-        <button type="submit">Invia email</button>
-      </div>
-    </form>
+    <div v-if="!sent">
+      <form v-if="!sending" @submit.prevent="submitForm()">
+        <div class="form-image"></div>
+        <div class="form-inputs">
+          <h2>Contattaci</h2>
+          <input type="text" placeholder="Nome*" v-model="formData.name" name="name">
+          <span>{{errors.name?.toString()}}</span>
+          <input type="text" placeholder="Cognome*" v-model="formData.surname" name="surname">
+          <span>{{errors.surname?.toString()}}</span>
+          <input type="email" placeholder="Email*" v-model="formData.email" name="email">
+          <span>{{errors.email?.toString()}}</span>
+          <textarea rows="4" placeholder="Messaggio*" v-model="formData.message" name="message"></textarea>
+          <span>{{errors.message?.toString()}}</span>
+          <button type="submit">Invia email</button>
+        </div>
+      </form>
+      <Loader v-else />
+    </div>
+    <h1 v-else>Email inviata con successo!</h1>
   </div>
 </template>
 
@@ -29,9 +72,6 @@
   .main-wrapper{
     padding: 50px;
     text-align: center;
-    h1{
-      margin-bottom: 30px;
-    }
     form{
       display: flex;
       justify-content: flex-end;
@@ -57,7 +97,7 @@
           font-size: 1rem;
           font-family: Arial, Helvetica, sans-serif;
           width: 70%;
-          margin: 15px 0;
+          margin: 15px 0 5px;
           padding: 15px;
           border-radius: 20px;
           border: none;
@@ -77,6 +117,10 @@
           &:hover{
             background: linear-gradient(to top left, green, greenyellow);
           }
+        }
+        span{
+          font-size: .9rem;
+          color: red;
         }
       }
     }
